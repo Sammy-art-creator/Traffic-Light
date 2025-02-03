@@ -1,26 +1,37 @@
+import { useState } from "react";
 import React from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import "./styles.css"; // Asegúrate de definir estilos en un archivo CSS separado.
 
-//create your first component
-const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
-};
+function trafficlight() {
+  const [color, setColor] = useState(null);
+  const randomColor = () => {
+    const colors = ["red", "yellow", "green"];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    setColor(colors[randomIndex]);
+  };
 
-export default Home;
+  return (
+	<div className="container">
+    <div className="traffic">
+      <div
+        className={`red light ${color === "red" ? "active" : ""}`}
+        onClick={() => setColor("red")}
+      ></div>
+      <div
+        className={`yellow light ${color === "yellow" ? "active" : ""}`}
+        onClick={() => setColor("yellow")}
+      ></div>
+      <div
+        className={`green light ${color === "green" ? "active" : ""}`}
+        onClick={() => setColor("green")}
+      ></div>
+    </div>
+	<button className="btn btn-dark" onClick={randomColor}>
+        Guess the color
+      </button>
+	</div>
+  );
+}
+
+export default trafficlight;
